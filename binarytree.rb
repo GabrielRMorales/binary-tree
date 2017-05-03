@@ -12,7 +12,7 @@ end
 def build_tree(array)
 i=0
 tree=Node.new(array[0])
-tree.right_child=Node.new(array[1])
+tree.right_child=Node.new(array[1], tree)
 puts "data: #{tree.data}"
 puts "right_child: #{tree.right_child}"
 puts "left_child: #{tree.left_child}"
@@ -23,9 +23,13 @@ temp=tree
   while (array[i+2]!=nil) do
     i+=2
     temp.parent=Node.new(array[i])
+    temp.parent.left_child=temp
     temp=temp.parent
-    temp.left_child=array[i-2]
-    temp.right_child=array[i+1]
+    #temp.left_child=array[i-2]
+    if (array[i+1]!=nil)
+    temp.right_child=Node.new(array[i+1])
+    temp.right_child.parent=temp
+    end
     puts "data: #{temp.data}"
     puts "right_child: #{temp.right_child}"
     puts "left_child: #{temp.left_child}"
