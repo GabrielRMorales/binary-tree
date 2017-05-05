@@ -5,10 +5,11 @@ def initialize(data="nil", parent="nil", left_child=nil, right_child=nil)
 @left_child=left_child
 @right_child=right_child
 @parent=parent
-
-end
 end
 
+end
+
+#for sorted arrays
 def build_tree(array)
 i=0
 tree=Node.new(array[0])
@@ -37,4 +38,68 @@ temp=tree
     puts " "
   end
   tree
+end
+
+#for unsorted arrays
+def build_tree_refactored(array)
+i=0
+tree=Node.new(array[0])
+temp=tree
+i+=1
+  while (i<array.length) do
+    if array[i]<=temp.data
+      if temp.left_child==nil
+       
+        temp.left_child=Node.new(array[i], temp)
+        puts "#{temp.data}"
+    
+        i+=1
+        temp=tree
+      else
+        temp=temp.left_child
+      end
+    else
+      if temp.right_child==nil
+      temp.right_child=Node.new(array[i], temp)
+      puts "#{temp.data}"
+      
+      i+=1
+      temp=tree
+      else
+      temp=temp.right_child
+      end
+    end        
+  end
+ tree
+end
+
+#possible recursive method
+def traversal(temp, i)
+    if i==arr.length 
+      return tree
+    
+    elsif array[i]<temp.data
+    
+      if temp.left_child==nil
+        temp.left_child=Node.new(arr[i], temp)
+        puts "#{temp.data}"
+        traversal(tree, i+1)
+        
+      else
+        puts "#{temp.data}"
+        traversal(temp.left_child, i)
+      end
+      
+    else
+      if temp.right_child==nil
+      temp.right_child=Node.new(arr[i], temp)
+      puts "#{temp.data}"
+      traversal(tree, i+1)
+      
+      else
+      traversal(temp.right_child, i)
+      end
+      
+    end    
+
 end
