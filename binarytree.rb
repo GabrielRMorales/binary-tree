@@ -73,33 +73,28 @@ i+=1
  tree
 end
 
-#possible recursive method
-def traversal(temp, i)
-    if i==arr.length 
-      return tree
-    
-    elsif array[i]<temp.data
-    
-      if temp.left_child==nil
-        temp.left_child=Node.new(arr[i], temp)
-        puts "#{temp.data}"
-        traversal(tree, i+1)
-        
-      else
-        puts "#{temp.data}"
-        traversal(temp.left_child, i)
-      end
-      
-    else
-      if temp.right_child==nil
-      temp.right_child=Node.new(arr[i], temp)
-      puts "#{temp.data}"
-      traversal(tree, i+1)
-      
-      else
-      traversal(temp.right_child, i)
-      end
-      
-    end    
+def breadth_first_search(binarytree, value)
+node_arr=[]
+current=binarytree
+node_arr.push(current)
+j=0
+  while j<node_arr.length do
+  puts "j #{j}"
+    current=node_arr[j]
+  puts "current #{current}"
+  puts "#{current.data}"
 
+    if current.left_child!=nil
+      node_arr.push(current.left_child)
+      temp=current.left_child
+      return temp if temp.data==value
+    end
+    if current.right_child!=nil
+      node_arr.push(current.right_child)
+      temp=current.right_child
+      return temp if temp.data==value
+    end  
+    j+=1
+  end
+  
 end
