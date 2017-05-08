@@ -80,34 +80,42 @@ j=0
 end
 
 def depth_first_search(current, value)
-  #needs refactoring in case the value is not there
+  checked_array=0
   newarr=[]
   newarr.push(current)
   return current.data if current.data==value
-  while current.data!=value do    
+  while current.data!=value do
+    return nil if checked_array>2
+    puts "current is #{current.data}"
     while current.left_child!=nil do
       current=current.left_child
       newarr.push(current)
       return current.data if current.data==value      
     end    
     i=newarr.length-1
+    puts "i is newarr.length aka #{i}"
     while i!=0 do
       current=newarr[i]
+      puts "current is #{current.data}"
       newarr.pop
       i-=1
+      puts "i is #{i}, arr.length is #{newarr.length}"
+      puts " "
       if current.right_child!=nil
       temp=current.right_child        
-      return temp.data if temp.data==value
+      return temp.data if temp.data==value      
       end
     end    
     if i==0
-      current=newarr[i]
+      checked_array+=1
+      newarr=[newarr[0]]
+      current=newarr[0]
       current=current.right_child
+      puts "close to 7"
+      return current.data if current.data==value 
       newarr.push(current)
-      return current.data if current.data==value       
     end
   end
-
 end
 
 def dfs_rec(node, value, arr)
